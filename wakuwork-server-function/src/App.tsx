@@ -1,6 +1,8 @@
 import { ServerComponent, ClientComponent } from "./ComponentWrappers.js";
 import JacketColorSelector from "./JacketColorSelector.js";
 
+import { fetchCombinations } from "./fetchCombinations.js";
+
 const App = ({ name = "Customer" }) => {
   return (
     <div
@@ -13,7 +15,7 @@ const App = ({ name = "Customer" }) => {
     >
       <ServerComponent>
         <h1>Header for {name}</h1>
-        <JacketColorSelector />
+        <JacketColorSelector fetchCombinations={fetchCombinations} />
       </ServerComponent>
 
       <h5

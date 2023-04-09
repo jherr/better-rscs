@@ -2,19 +2,20 @@
 
 import { ClientComponent } from "./ComponentWrappers.js";
 import { useColor, useCart } from "./store.js";
-import { useState, useEffect } from "react";
-import { serve } from "wakuwork/client";
+import ProductCarousel from "./ProductCarousel.js";
 
-const ProductCarousel = serve<{ color: string }>("ProductCarousel");
-
-export default function () {
+export default function ({
+  fetchCombinations,
+}: {
+  fetchCombinations: (color: string) => Promise<
+    {
+      name: string;
+      thumbnail: string;
+    }[]
+  >;
+}) {
   const [color, setColor] = useColor();
   const [cart] = useCart();
-
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <ClientComponent>
@@ -83,7 +84,7 @@ export default function () {
           </div>
         </div>
       </div>
-      {mounted && <ProductCarousel color={color} />}
+      <ProductCarousel color={color} fetchCombinations={fetchCombinations} />
     </ClientComponent>
   );
 }

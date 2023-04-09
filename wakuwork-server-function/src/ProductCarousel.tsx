@@ -1,20 +1,35 @@
-import { ServerComponent } from "./ComponentWrappers.js";
+"use client";
+import { useState, useEffect } from "react";
+import { ClientComponent } from "./ComponentWrappers.js";
 import AddToCart from "./AddToCart.js";
 
-const fetchCombinations = (
-  color: string
-): Promise<
-  {
-    name: string;
-    thumbnail: string;
-  }[]
-> => fetch(`http://localhost:3000/${color}.json`).then((res) => res.json());
+const ProductCarousel = ({
+  color,
+  fetchCombinations,
+}: {
+  color: string;
+  fetchCombinations: (color: string) => Promise<
+    {
+      name: string;
+      thumbnail: string;
+    }[]
+  >;
+}) => {
+  const [combinations, setCombinations] = useState<
+    {
+      name: string;
+      thumbnail: string;
+    }[]
+  >([]);
 
-const ProductCarousel = async ({ color }: { color: string }) => {
-  const combinations = await fetchCombinations(color);
+  useEffect(() => {
+    (async () => {
+      setCombinations(await fetchCombinations(color));
+    })();
+  }, [color]);
 
   return (
-    <ServerComponent>
+    <ClientComponent>
       <div
         style={{
           display: "flex",
@@ -35,7 +50,7 @@ const ProductCarousel = async ({ color }: { color: string }) => {
           </div>
         ))}
       </div>
-    </ServerComponent>
+    </ClientComponent>
   );
 };
 

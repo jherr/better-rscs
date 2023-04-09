@@ -4,8 +4,6 @@ export const getEntry: GetEntry = async (id) => {
   switch (id) {
     case "App":
       return import("./src/App.js");
-    case "ProductCarousel":
-      return import("./src/ProductCarousel.js");
     default:
       throw new Error(`Unknown entry id: ${id}`);
   }
@@ -15,10 +13,7 @@ export const prefetcher: Prefetcher = async (path) => {
   switch (path) {
     case "/":
       return {
-        entryItems: [
-          ["App", { name: "Wakuwork" }],
-          ["ProductCarousel", { color: "green" }],
-        ],
+        entryItems: [["App", { name: "Wakuwork" }]],
         clientModules: [],
       };
     default:
