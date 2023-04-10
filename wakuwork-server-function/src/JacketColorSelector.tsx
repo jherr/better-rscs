@@ -43,16 +43,10 @@ export default function ({
           }}
         >
           <h2>Jacket Color</h2>
-          <select onChange={(evt) => setColor(evt.target.value)}>
-            <option value="pink" selected={color === "pink"}>
-              Pink
-            </option>
-            <option value="blue" selected={color === "blue"}>
-              Blue
-            </option>
-            <option value="green" selected={color === "green"}>
-              Green
-            </option>
+          <select value={color} onChange={(evt) => setColor(evt.target.value)}>
+            <option value="pink">Pink</option>
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
           </select>
           <h2>Cart</h2>
           <div>

@@ -1,9 +1,13 @@
 import { ClientComponent } from "./ComponentWrappers";
-import { useCombinations } from "../store";
 import AddToCart from "./AddToCart";
 
+import { useCombinations } from "@/store";
+
 const ProductCarousel = () => {
-  const combinations = useCombinations();
+  const combinations: {
+    name: string;
+    thumbnail: string;
+  }[] = useCombinations();
 
   return (
     <ClientComponent>

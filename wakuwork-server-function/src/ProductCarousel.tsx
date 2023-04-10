@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+
 import { ClientComponent } from "./ComponentWrappers.js";
 import AddToCart from "./AddToCart.js";
 
